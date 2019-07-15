@@ -81,7 +81,7 @@ namespace Configuretty
             xdoc.Load(m_filepath);
             XmlNode descriptionsNode = xdoc.SelectSingleNode("//Mappings/Descriptions");
             XmlNode description = xdoc.CreateElement("Description");
-            descriptionsNode.SelectSingleNode("//Mappings/Descriptions/").AppendChild(description);
+            descriptionsNode.SelectSingleNode("//Mappings/Descriptions").AppendChild(description);
             XmlNode Name = xdoc.CreateElement("Name");
             Name.InnerText = textBox2.Text;
             description.AppendChild(Name);
