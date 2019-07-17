@@ -44,7 +44,8 @@ namespace Configuretty
         {
             string regex = @"^\d{1,9}[':']\d{1,9}[':']\d{1,9}[':']\d{1,9}[':']\d{1,9}[':']\d{1,9}[':']\d{1,9}";
             string regex2 = @"^[A-Z]{1,2}";
-
+            //string regex3 = @"^[A-Z]{1,}\s[a-z]{1,}\s['-']{1,}\s['_']{1,}\s[' ']{1,}";
+            
             if (!Regex.IsMatch(textBox1.Text, regex))
             {
                 MessageBox.Show("Please enter a valid number separated by : ");
@@ -59,6 +60,13 @@ namespace Configuretty
                 textBox2.Focus();
                 return;
             }
+
+            //if (!Regex.IsMatch(textBox2.Text, regex3))
+            //{
+            //    MessageBox.Show("Please enter a valid name");
+            //    textBox2.Text = string.Empty;
+            //    return;
+            //}
 
             if (!Regex.IsMatch(textBox3.Text, regex2))
             {
@@ -77,11 +85,11 @@ namespace Configuretty
 
                 namesList.Add(name);
             }
+            
 
-            xdoc.Load(m_filepath);
             XmlNode descriptionsNode = xdoc.SelectSingleNode("//Mappings/Descriptions");
             XmlNode description = xdoc.CreateElement("Description");
-            descriptionsNode.SelectSingleNode("//Mappings/Descriptions").AppendChild(description);
+           
             XmlNode Name = xdoc.CreateElement("Name");
             Name.InnerText = textBox2.Text;
             description.AppendChild(Name);
@@ -98,12 +106,13 @@ namespace Configuretty
             function.InnerText = textBox4.Text;
             description.AppendChild(function);
             XmlNode platformId = xdoc.CreateElement("platformId");
+            platformId.InnerText = textBox5.Text;
             description.AppendChild(platformId);
-            xdoc.DocumentElement.AppendChild(description);
+            descriptionsNode.AppendChild(description);
             xdoc.Save(m_filepath);
             MessageBox.Show("Entity added succefully");
-
-
+            Load_Click(null, null);
+            
 
             //return namesList.Distinct().ToList();
         }
@@ -161,13 +170,50 @@ namespace Configuretty
         private void Load_Click(object sender, EventArgs e)
         {
             DataSet dataSet = new DataSet();
-            dataSet.ReadXml(@"m_filepath");
-            dataGridView1.DataSource = dataSet.Tables[0];
+            dataSet.ReadXml(m_filepath);
+            dataGridView1.DataSource = dataSet;
+            dataGridView1.DataMember = "Description";
         }
 
         private void fileToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void Save_Click(object sender, EventArgs e)
+        {
+            DataSet dt = (DataSet)dataGridView1.DataSource;
+            dt.WriteXml(m_filepath);
+        }
+
+        private void QUIT_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            DataSet dt = (DataSet)dataGridView1.DataSource;
+            dt.WriteXml(m_filepath);
+            Application.Exit();
+        }
+
+        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
+        {
+
+        }
+
+        private void Form1_Load(object sender, FormClosingEventArgs e)
+        {
+            DialogResult dialog = MessageBox.Show("Do you really want to close the program?", "Exit", MessageBoxButtons.YesNo);
+            if(dialog == DialogResult.Yes)
+            {
+                Application.Exit();
+            }
+            else if (dialog == DialogResult.No)
+            {
+                e.Cancel = true;
+            }
         }
     }
 }
