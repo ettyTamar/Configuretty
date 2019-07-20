@@ -40,12 +40,12 @@ namespace Configuretty
             return namesList.Distinct().ToList();
         }
 
-        private void LINK_Click(object sender, EventArgs e)
+        private void ADD_Click(object sender, EventArgs e)
         {
             string regex = @"^\d{1,9}[':']\d{1,9}[':']\d{1,9}[':']\d{1,9}[':']\d{1,9}[':']\d{1,9}[':']\d{1,9}";
-            string regex2 = @"^[A-Z]{1,2}";
-            //string regex3 = @"^[A-Z]{1,}\s[a-z]{1,}\s['-']{1,}\s['_']{1,}\s[' ']{1,}";
-            
+            string regex2 = @"^[A-Za-z]{2}$";
+            string regex3 = @"^[A-Za-z0-9 -_]{1,15}$";
+
             if (!Regex.IsMatch(textBox1.Text, regex))
             {
                 MessageBox.Show("Please enter a valid number separated by : ");
@@ -61,19 +61,22 @@ namespace Configuretty
                 return;
             }
 
-            //if (!Regex.IsMatch(textBox2.Text, regex3))
-            //{
-            //    MessageBox.Show("Please enter a valid name");
-            //    textBox2.Text = string.Empty;
-            //    return;
-            //}
+            if (!Regex.IsMatch(textBox2.Text, regex3))
+            {
+                MessageBox.Show("Please enter a valid name");
+                textBox2.Text = string.Empty;
+                return;
+            }
 
+            textBox3.Text = textBox3.Text.ToUpper();
+           
             if (!Regex.IsMatch(textBox3.Text, regex2))
             {
                 MessageBox.Show("Please enter only a valid country shortcat");
                 textBox3.Text = string.Empty;
                 return;
             }
+            textBox4.Text = textBox4.Text.ToUpper();
 
             xdoc.Load(m_filepath);
 
@@ -112,9 +115,15 @@ namespace Configuretty
             xdoc.Save(m_filepath);
             MessageBox.Show("Entity added succefully");
             Load_Click(null, null);
-            
 
-            //return namesList.Distinct().ToList();
+            //if (textBox1.Text == "" || textBox2.Text == "" || textBox3.Text == "" || comboBox1.SelectedItem.ToString() == "" || textBox4.Text == "")
+            //{
+            //    // display popup box  
+            //    MessageBox.Show("Please fill in the DIS field", "Error", ADD.ok, ADD.Error);
+            //    textBox1.Focus(); // set focus to lastNameTextBox  
+            //    return;
+            //} // end if  
+            ////return namesList.Distinct().ToList();
         }
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
@@ -203,17 +212,27 @@ namespace Configuretty
 
         }
 
-        private void Form1_Load(object sender, FormClosingEventArgs e)
+        private void toolTip1_Popup(object sender, PopupEventArgs e)
         {
-            DialogResult dialog = MessageBox.Show("Do you really want to close the program?", "Exit", MessageBoxButtons.YesNo);
-            if(dialog == DialogResult.Yes)
-            {
-                Application.Exit();
-            }
-            else if (dialog == DialogResult.No)
-            {
-                e.Cancel = true;
-            }
+
         }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        //private void Configuretty_Load(object sender, FormClosingEventArgs e)
+        //{
+        //    DialogResult dialog = MessageBox.Show("Do you really want to close the program?", "Exit", MessageBoxButtons.YesNo);
+        //    if (dialog == DialogResult.Yes)
+        //    {
+        //        Application.Exit();
+        //    }
+        //    else if (dialog == DialogResult.No)
+        //    {
+        //        e.Cancel = true;
+        //    }
+        //}
     }
 }

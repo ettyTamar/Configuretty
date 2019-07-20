@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.label1 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -51,6 +52,11 @@
             this.Quit = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.toolTip2 = new System.Windows.Forms.ToolTip(this.components);
+            this.toolTip3 = new System.Windows.Forms.ToolTip(this.components);
+            this.toolTip4 = new System.Windows.Forms.ToolTip(this.components);
+            this.toolTip5 = new System.Windows.Forms.ToolTip(this.components);
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
@@ -77,6 +83,7 @@
             this.textBox1.Size = new System.Drawing.Size(187, 22);
             this.textBox1.TabIndex = 1;
             this.textBox1.Text = " ";
+            this.toolTip1.SetToolTip(this.textBox1, "Please enter 7 numbers.\r\nAfter every number write \':\' ");
             this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // label2
@@ -99,6 +106,7 @@
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(187, 22);
             this.textBox2.TabIndex = 3;
+            this.toolTip2.SetToolTip(this.textBox2, "Enter only letters and specificchar\'s \'_\' \'-\' and space");
             this.textBox2.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
             // 
             // BattleDimension
@@ -150,6 +158,7 @@
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(187, 22);
             this.textBox3.TabIndex = 7;
+            this.toolTip3.SetToolTip(this.textBox3, "Enter only two letters");
             this.textBox3.TextChanged += new System.EventHandler(this.textBox3_TextChanged_1);
             // 
             // Function
@@ -187,8 +196,9 @@
             this.ADD.Size = new System.Drawing.Size(100, 27);
             this.ADD.TabIndex = 10;
             this.ADD.Text = "ADD";
+            this.toolTip4.SetToolTip(this.ADD, "Add and save the entity");
             this.ADD.UseVisualStyleBackColor = false;
-            this.ADD.Click += new System.EventHandler(this.LINK_Click);
+            this.ADD.Click += new System.EventHandler(this.ADD_Click);
             // 
             // openFileDialog1
             // 
@@ -216,7 +226,7 @@
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
             this.openToolStripMenuItem.Text = "Open";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
@@ -238,6 +248,7 @@
             this.Load.Size = new System.Drawing.Size(75, 23);
             this.Load.TabIndex = 16;
             this.Load.Text = "Load";
+            this.toolTip5.SetToolTip(this.Load, "Load the saved changes");
             this.Load.UseVisualStyleBackColor = true;
             this.Load.Click += new System.EventHandler(this.Load_Click);
             // 
@@ -287,6 +298,10 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // toolTip1
+            // 
+            this.toolTip1.Popup += new System.Windows.Forms.PopupEventHandler(this.toolTip1_Popup);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
@@ -314,6 +329,7 @@
             this.Controls.Add(this.menuStrip1);
             this.Font = new System.Drawing.Font("Californian FB", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ForeColor = System.Drawing.Color.Black;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.KeyPreview = true;
             this.MainMenuStrip = this.menuStrip1;
             this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
@@ -353,6 +369,11 @@
         private System.Windows.Forms.Button Quit;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.ColorDialog colorDialog1;
+        private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.ToolTip toolTip2;
+        private System.Windows.Forms.ToolTip toolTip3;
+        private System.Windows.Forms.ToolTip toolTip4;
+        private System.Windows.Forms.ToolTip toolTip5;
     }
 }
 
